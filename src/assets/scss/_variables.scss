@@ -1,0 +1,199 @@
+//$breakpoints: (
+//        "phone": 400px,
+//        "phone-l": 480px,
+//        "phablet": 560px,
+//        "tablet-s": 640px,
+//        "tablet": 768px,
+//        "tablet-l": 1024px,
+//        "desktop": 1248px,
+//        "desktop-m": 1440px,
+//);
+
+
+@mixin bp($point) {
+  @if $point == desktop-l {
+    @media (max-width: 1920px) {
+      @content;
+    }
+  } @else if $point == r-desktop-l {
+    @media (min-width: 1920px) {
+      @content;
+    }
+  } @else if $point == desktop-m {
+    @media (max-width: 1500px) {
+      @content;
+    }
+  } @else if $point == r-desktop-m {
+    @media (min-width: 1500px) {
+      @content;
+    }
+  } @else if $point == mac {
+    @media (max-width: 1440px) {
+      @content;
+    }
+  } @else if $point == global {
+    @media (max-width: 1366px) {
+      @content;
+    }
+  } @else if $point == desktop {
+    @media (max-width: 1200px) {
+      @content;
+    }
+  } @else if $point == small-desktop {
+    @media (max-width: 1024px) {
+      @content;
+    }
+  } @else if $point == wide-mobile {
+    @media (max-width: 767px) {
+      @content;
+    }
+  } @else if $point == r-tablet {
+    @media (min-width: 992px) {
+      @content;
+    }
+  } @else if $point == tablet {
+    @media (max-width: 768px) {
+      @content;
+    }
+  } @else if $point == mobile {
+    @media (max-width: 767px) {
+      @content;
+    }
+  }@else if $point == min-mobile {
+    @media (max-width: 576px) {
+      @content;
+    }
+  } @else if $point == r-global {
+    @media (max-width: 1180px) {
+      @content;
+    }
+  } @else if $point == r-desktop {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else if $point == desktop-a {
+    @media (max-width: 1280px) {
+      @content;
+    }
+  } @else if $point == r-tablet {
+    @media (min-width: 1024px) {
+      @content;
+    }
+  } @else if $point == r-tablet-small {
+    @media (min-width: 768px) {
+      @content;
+    }
+  } @else if $point == r-mobile {
+    @media (min-width: 576px) {
+      @content;
+    }
+  } @else if $point == nav {
+    @media (max-width: 900px) {
+      @content;
+    }
+  } @else if $point == r-nav {
+    @media (min-width: 900px) {
+      @content;
+    }
+  } @else if $point == mobile-small {
+    @media (max-width: 480px) {
+      @content;
+    }
+  } @else if $point == mobile-xsmall {
+    @media (max-width: 320px) {
+      @content;
+    }
+  }
+}
+
+
+
+
+//@mixin bp($width, $type: max) {
+//  @if map_has_key($breakpoints, $width) {
+//    $width: map_get($breakpoints, $width);
+//    @if $type == max {
+//      $width: $width - 1px;
+//    }
+//    @media only screen and (#{$type}-width: $width) {
+//      @content;
+//    }
+//  }
+//}
+
+@mixin pseudo($display: block, $pos: absolute, $content: '') {
+  content: $content;
+  display: $display;
+  position: $pos;
+}
+
+@mixin triangle($direction, $color: black, $size: 6px, $position: absolute, $round: false) {
+  @include pseudo($pos: $position);
+  width: 0;
+  height: 0;
+  @if $round {
+    border-radius: 3px;
+  }
+  @if $direction == down {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-top: $size solid $color;
+    margin-top: 0 - round( $size / 2.5 );
+  } @else if $direction == up {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid $color;
+    margin-bottom: 0 - round( $size / 2.5 );
+  } @else if $direction == right {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-left: $size solid $color;
+    margin-right: -$size;
+  } @else if $direction == left {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-right: $size solid $color;
+    margin-left: -$size;
+  }
+}
+
+@mixin center($position) {
+  position: absolute;
+
+  @if $position == 'vertical' {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  } @else if $position == 'horizontal' {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translate(-50%);
+  } @else if $position == 'both' {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}
+
+@mixin truncate($truncation-boundary) {
+  max-width: $truncation-boundary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin dont-touch {
+  user-select: none;
+  pointer-events: none;
+}
+
+
+
+
+
+
+
